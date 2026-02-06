@@ -231,7 +231,7 @@
         <div class="filter-section">
             <h3>Lọc Sản Phẩm</h3>
             <div class="filter-group">
-                <select>
+                <select id="categoryFilter">
                     <option value="">Tất cả danh mục</option>
                     <option value="electronics">Điện tử</option>
                     <option value="clothing">Quần áo</option>
@@ -239,7 +239,7 @@
                     <option value="home">Nhà cửa</option>
                 </select>
                 
-                <select>
+                <select id="priceFilter">
                     <option value="">Giá cả</option>
                     <option value="0-100">0 - 100.000đ</option>
                     <option value="100-500">100.000 - 500.000đ</option>
@@ -247,92 +247,107 @@
                     <option value="1000+">Trên 1.000.000đ</option>
                 </select>
                 
-                <input type="text" placeholder="Tìm kiếm sản phẩm...">
-                <button>Tìm kiếm</button>
+                <select id="sortSelect">
+                    <option value="">Sắp xếp theo</option>
+                    <option value="price-asc">Giá: Thấp đến Cao</option>
+                    <option value="price-desc">Giá: Cao đến Thấp</option>
+                    <option value="rating">Đánh giá cao nhất</option>
+                    <option value="newest">Mới nhất</option>
+                </select>
+                
+                <select id="ratingFilter">
+                    <option value="">Tất cả đánh giá</option>
+                    <option value="5">5 sao</option>
+                    <option value="4">4 sao trở lên</option>
+                    <option value="3">3 sao trở lên</option>
+                </select>
+                
+                <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+                <button onclick="searchProducts()">Tìm kiếm</button>
             </div>
         </div>
         
-        <div class="products-grid">
+        <div class="products-grid" id="productsGrid">
             <!-- Product 1 -->
-            <div class="product-card">
+            <div class="product-card" data-category="electronics" data-price="299" data-rating="5">
                 <div class="product-image">Hình ảnh sản phẩm 1</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 1</div>
                     <div class="product-price">299.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐⭐ (150 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 1', 299000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
             
             <!-- Product 2 -->
-            <div class="product-card">
+            <div class="product-card" data-category="electronics" data-price="399" data-rating="4">
                 <div class="product-image">Hình ảnh sản phẩm 2</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 2</div>
                     <div class="product-price">399.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐ (98 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 2', 399000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
             
             <!-- Product 3 -->
-            <div class="product-card">
+            <div class="product-card" data-category="clothing" data-price="199" data-rating="5">
                 <div class="product-image">Hình ảnh sản phẩm 3</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 3</div>
                     <div class="product-price">199.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐⭐ (245 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 3', 199000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
             
             <!-- Product 4 -->
-            <div class="product-card">
+            <div class="product-card" data-category="books" data-price="499" data-rating="4">
                 <div class="product-image">Hình ảnh sản phẩm 4</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 4</div>
                     <div class="product-price">499.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐ (120 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 4', 499000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
             
             <!-- Product 5 -->
-            <div class="product-card">
+            <div class="product-card" data-category="home" data-price="349" data-rating="5">
                 <div class="product-image">Hình ảnh sản phẩm 5</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 5</div>
                     <div class="product-price">349.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐⭐ (178 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 5', 349000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
             
             <!-- Product 6 -->
-            <div class="product-card">
+            <div class="product-card" data-category="clothing" data-price="279" data-rating="4">
                 <div class="product-image">Hình ảnh sản phẩm 6</div>
                 <div class="product-info">
                     <div class="product-name">Sản Phẩm 6</div>
                     <div class="product-price">279.000đ</div>
                     <div class="product-rating">⭐⭐⭐⭐ (89 đánh giá)</div>
                     <div class="product-actions">
-                        <button class="btn-cart">Thêm vào giỏ</button>
-                        <button class="btn-wishlist">♥</button>
+                        <button class="btn-cart" onclick="addToCart('Sản Phẩm 6', 279000)">Thêm vào giỏ</button>
+                        <button class="btn-wishlist" onclick="toggleWishlist(this)">♥</button>
                     </div>
                 </div>
             </div>
@@ -351,5 +366,125 @@
     <footer>
         <p>&copy; 2026 Cửa Hàng Sản Phẩm. Tất cả quyền được bảo lưu.</p>
     </footer>
+    
+    <script>
+        // Thêm vào giỏ hàng
+        function addToCart(productName, price) {
+            alert(`✓ Đã thêm ${productName} (${price.toLocaleString('vi-VN')}đ) vào giỏ hàng!`);
+        }
+        
+        // Toggle yêu thích
+        function toggleWishlist(btn) {
+            btn.classList.toggle('active');
+            if (btn.classList.contains('active')) {
+                btn.style.color = '#ff6b6b';
+                alert('✓ Đã thêm vào danh sách yêu thích!');
+            } else {
+                btn.style.color = '#333';
+                alert('✓ Đã xóa khỏi danh sách yêu thích!');
+            }
+        }
+        
+        // Sắp xếp sản phẩm
+        function sortProducts(sortType) {
+            const grid = document.getElementById('productsGrid');
+            const products = Array.from(grid.querySelectorAll('.product-card'));
+            
+            products.sort((a, b) => {
+                const priceA = parseInt(a.dataset.price);
+                const priceB = parseInt(b.dataset.price);
+                const ratingA = parseInt(a.dataset.rating);
+                const ratingB = parseInt(b.dataset.rating);
+                
+                switch(sortType) {
+                    case 'price-asc':
+                        return priceA - priceB;
+                    case 'price-desc':
+                        return priceB - priceA;
+                    case 'rating':
+                        return ratingB - ratingA;
+                    case 'newest':
+                        return 0;
+                    default:
+                        return 0;
+                }
+            });
+            
+            grid.innerHTML = '';
+            products.forEach(product => grid.appendChild(product));
+        }
+        
+        // Lọc sản phẩm
+        function filterProducts() {
+            const category = document.getElementById('categoryFilter').value;
+            const ratingFilter = document.getElementById('ratingFilter').value;
+            const searchText = document.getElementById('searchInput').value.toLowerCase();
+            
+            const products = document.querySelectorAll('.product-card');
+            let visibleCount = 0;
+            
+            products.forEach(product => {
+                const productCategory = product.dataset.category;
+                const productRating = parseInt(product.dataset.rating);
+                const productName = product.querySelector('.product-name').textContent.toLowerCase();
+                
+                let show = true;
+                
+                // Lọc theo danh mục
+                if (category && productCategory !== category) {
+                    show = false;
+                }
+                
+                // Lọc theo rating
+                if (ratingFilter) {
+                    if (ratingFilter === '5' && productRating !== 5) show = false;
+                    if (ratingFilter === '4' && productRating < 4) show = false;
+                    if (ratingFilter === '3' && productRating < 3) show = false;
+                }
+                
+                // Tìm kiếm theo tên
+                if (searchText && !productName.includes(searchText)) {
+                    show = false;
+                }
+                
+                product.style.display = show ? 'block' : 'none';
+                if (show) visibleCount++;
+            });
+            
+            // Thông báo nếu không có sản phẩm
+            if (visibleCount === 0) {
+                const grid = document.getElementById('productsGrid');
+                if (!document.querySelector('.no-results')) {
+                    const noResults = document.createElement('div');
+                    noResults.className = 'no-results';
+                    noResults.style.gridColumn = '1 / -1';
+                    noResults.style.textAlign = 'center';
+                    noResults.style.padding = '40px';
+                    noResults.style.color = '#999';
+                    noResults.textContent = 'Không tìm thấy sản phẩm nào phù hợp!';
+                    grid.appendChild(noResults);
+                }
+            }
+        }
+        
+        // Tìm kiếm sản phẩm
+        function searchProducts() {
+            filterProducts();
+        }
+        
+        // Gắn sự kiện cho các bộ lọc
+        document.getElementById('categoryFilter').addEventListener('change', filterProducts);
+        document.getElementById('ratingFilter').addEventListener('change', filterProducts);
+        document.getElementById('sortSelect').addEventListener('change', (e) => {
+            sortProducts(e.target.value);
+        });
+        
+        // Enter để tìm kiếm
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+    </script>
 </body>
 </html>
