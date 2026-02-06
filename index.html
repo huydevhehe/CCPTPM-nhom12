@@ -2,28 +2,37 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>My Shop</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <header>
-    <h1>My Shop</h1>
-    <nav>
-      <ul>
-        <li><a href="#">Trang chủ</a></li>
-        <li><a href="pages/products.html">Sản phẩm</a></li>
-        <li><a href="pages/contact.html">Liên hệ</a></li>
-      </ul>
-    </nav>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">My Shop</h1>
+      <nav>
+        <ul class="menu">
+          <li><a class="active" href="#">Trang chủ</a></li>
+          <li><a href="pages/products.html">Sản phẩm</a></li>
+          <li><a href="pages/contact.html">Liên hệ</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section id="banner">
-    <img id="slider" src="https://via.placeholder.com/800x300" alt="banner">
-  </section>
+  <main>
+    <section id="banner">
+      <img id="slider" src="https://via.placeholder.com/1000x350" alt="Banner">
+    </section>
 
-  <footer>
-    <p>© 2026 My Shop</p>
+    <section class="intro container">
+      <h2>Chào mừng đến với My Shop</h2>
+      <p>Cửa hàng cung cấp các sản phẩm chất lượng với giá tốt nhất.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 My Shop. All rights reserved.</p>
   </footer>
 
   <script src="js/slider.js"></script>
