@@ -372,10 +372,90 @@
                 transform: translateY(0);
             }
         }
+
+        /* Dark Mode Styles */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 28px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1) rotate(20deg);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+        }
+
+        body.dark-mode .container {
+            background: rgba(30, 30, 50, 0.95);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        body.dark-mode .form-section h2,
+        body.dark-mode label {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode input,
+        body.dark-mode textarea {
+            background: #2a2a3e;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: #999;
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus {
+            background: #1e1e2e;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        body.dark-mode input:hover,
+        body.dark-mode textarea:hover {
+            border-color: #764ba2;
+            background: #2a2a3e;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
     </style>
 </head>
 
 <body>
+    <div class="theme-toggle" id="themeToggle" title="Chuyển đổi chế độ tối/sáng">🌙</div>
     <div class="container">
         <div class="contact-info">
             <div class="contact-info-content">
@@ -500,6 +580,34 @@
             input.addEventListener('blur', function () {
                 this.parentElement.style.transform = 'scale(1)';
             });
+        });
+
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const htmlElement = document.documentElement;
+        const bodyElement = document.body;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            bodyElement.classList.add('dark-mode');
+            themeToggle.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', function () {
+            const isDarkMode = bodyElement.classList.toggle('dark-mode');
+
+            // Update toggle icon
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+
+            // Add rotation animation
+            themeToggle.style.transform = 'rotate(360deg)';
+            setTimeout(() => {
+                themeToggle.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+
+            // Save preference
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         });
     </script>
 </body>
